@@ -24,16 +24,24 @@ class Perro(object):
             print("Estado inválido") 
     
     def mostrar_informacion(self):
-        print(f"Nombre: {self.nombre}")
-        print(f"Raza: {self.raza}")
-        print(f"Edad: {self.edad}")
-        print(f"Tamaño: {self.tamaño}")
-        print(f"Peso: {self.peso}")
-        print(f"Estado salud: {self.estado_salud}")
-        print(f"Vacunado: {self.vacunado}")
-        print(f"Estado: {self.estado}")
-        print(f"Temperamento: {self.temperamento}")
-        print(f"ID: {self.id}")
+        """
+        es para mostrar la informacion del perro en la consola
+        
+        ejemplo para usarlo:
+            perro.mostrar_informacion()
+        """
+        return {
+        "Nombre": self.nombre,
+        "Raza": self.raza,
+        "Edad": self.edad,
+        "Tamaño": self.tamaño,
+        "Peso": self.peso,
+        "Estado salud": self.estado_salud,
+        "Vacunado": self.vacunado,
+        "Estado": self.estado,
+        "Temperamento": self.temperamento,
+        "ID": self.id,
+    }
 
 
 '''2.Clase UsuarioAdoptante
@@ -42,7 +50,12 @@ historial_adopciones.
 ● Métodos: registrarse, modificar datos, ver historial, etc.'''
 
 class UsuarioAdoptante(object):
+    
     def __init__(self, preferencias=None, historial_adopciones=None):
+        """
+        Pongo los datos con None porque en teoria todavia el usuario no se registro, entonces no hay datos"
+        
+        """
         
         self.nombre = None
         self.apellido = None
@@ -53,6 +66,13 @@ class UsuarioAdoptante(object):
         self.historial_adopciones = historial_adopciones or []
         
     def registrarse(self, nombre, apellido, dni, email, telf):
+        """ pongo que cuando se registre la persona, si no llenaron todos los campos
+        salte un error y que tenga que llenar todos los datos para poder registrarse.
+        
+        Con el return te da un diccionario con todos los datos del usuario.
+        
+        Para usarlo seria por ej:
+        usuario.registrarse("Joaquin", "Fernandez, "47573299", "joaquinfernandezds@gmail.com, "1144005923")"""
         
         if not all ([nombre, apellido, dni, email, telf]):
             raise ValueError("Llenar todos los campos")
@@ -71,16 +91,41 @@ class UsuarioAdoptante(object):
             "telf": self.telf,
         }
         
-    def modificar_datos(self, nuevo_nombre=None, nuevo_dni=None, nuevo_email=None):
+    def modificar_datos(self, nuevo_nombre=None, nuevo_apellido=None, nuevo_telf=None, nuevo_dni=None, nuevo_email=None):
+        """ modifico los datos del usuario, actualizo sus atributos.
+        Si hay un nuevo valor para algun atributo, se actualiza y retorna un mensaje diciendo que fueron modificados, y si no se pasa
+        un valor, los datos no se modifican.
+        
+        Por defecto los datos son None
+        
+        por ej para usarlo seria:
+        usuario.modificar_datos(nuevo_nombre="Pepocho", nuevo_apellido="blablabla", y asi con los otros datos)"""
+        
         if nuevo_nombre:
             self.nombre = nuevo_nombre
+        if nuevo_apellido:
+            self.apellido = nuevo_apellido
         if nuevo_dni:
             self.dni = nuevo_dni
         if nuevo_email:
             self.email = nuevo_email
+        if nuevo_telf:
+            self.telf = nuevo_telf
         return "Los datos fueron modificados correctamente"
 
     def datosUsuario(self):
+        """organiza los datos del usuario en un diccionario, con su:
+        - nombre, apellido, DNI, email
+        - preferencias del usuario
+        - historial de adopciones
+        
+        esta bueno para acceder a toda la información del usuario por asi decirlo de manera estructurada
+        y reutilizarla en otras partes del programa, como mostrarla en una interfaz
+        gráfica o guardarla en una base de datos ponele
+        
+        para usarlo:
+        datos = usuario.datosUsuario()
+        print(datos["Nombre"])  # accederia al nombre del usuario"""
         
         datos = {
             "Nombre": self.nombre,
