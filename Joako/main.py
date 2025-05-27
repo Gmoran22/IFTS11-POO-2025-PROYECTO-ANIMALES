@@ -4,6 +4,17 @@
 ● Métodos: cambiar estado, mostrar información, etc.'''
 
 class Perro(object):
+    """representa un perro en el sistema de adopción.
+    
+    almacena la información de un perro: su nombre, raza, edad,
+        tamaño, peso, estado de salud, estado en el sistema, etc.
+        con los metodos para cambiar su estado y mostrar su información
+
+        ej para usarlo:
+        perro = Perro("Gerardo", "chihuahua", 3, "Chiquito", 25, "Saludable", True, "disponible", "Amigable", 101)
+        perro.cambiarEstado("reservado")
+        perro.mostrar_informacion()
+    """
     def __init__(self, nombre, raza, edad, tamaño, peso, estado_salud, vacunado, estado, temperamento, id):
         self.nombre = nombre
         self.raza = raza
@@ -17,6 +28,12 @@ class Perro(object):
         self.id = id
         
     def cambiarEstado(self,nuevo_estado):
+        """cambia el estado del perro.
+        el estado tiene que ser "disponible", "reservado" o "adoptado"
+        
+        ej para usarlo:
+        perro.cambiarEstado("adoptado") """
+
         if nuevo_estado in ["disponible", "reservado", "adoptado"]:
             self.estado = nuevo_estado
             print("Estado actualizado")
