@@ -116,5 +116,29 @@ class SistemaAdopcion:
                 print("Perro eliminado")
                 return
         print("Perro no encontrado")
+    def eliminarPerros(self, nombre): #lo hice con nombre pero estaria mejor con id porque nombres puede haber iguales
+         for perro in self.perros: #busco el nombre del perro en la lista de perros
+             if perro.nombre == nombre: #si el nombre que puse esta en la lista de perros
+               self.perros.remove(perro) #lo elimino
+               print(f"Perro {nombre} eliminado.") 
+               break # una vez que lo encontré rompo el programa porque si no lo hago, seguiria buscando 
+         else:
+    
+            print("No se encontró un perro con ese nombre.")
+         print(f"{self.perros}")
+    def registrarUsuario(self,nuevo_usuario):
+        self.usuarios.append(nuevo_usuario)
+    def postularPerro(self,id):
+        for perro in self.perros:
+            if perro.id == id:
+                if perro.estado== "Disponible":
+                    perro.cambiarEstado("Reservado")
+                    print(f"Perro {id} reservado con éxito!")
+                    return perro
+                else:
+                    print(f"Este perro {id} se encuentra reservado, no es posible postularse")
+                    return None
+        print(f"No se encontró ningun perro con el ID {id}")
+        return None
         
     
